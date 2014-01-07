@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Title &amp; Meta -->
+    <title>Frontend tests</title>
+    <meta charset="utf-8">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="libs/mocha/mocha.css">
+</head>
+
+<body>
+
+    <div id="mocha"></div>
+
+    <!-- Testing Libraries -->
+    <script src="libs/mocha/mocha.js"></script>
+    <script src="libs/chai/chai.js"></script>
+    <script>
+        // Use the expect version of chai assertions - http://chaijs.com/api/bdd
+        var expect = chai.expect;
+        var should = chai.should();
+        // Tell mocha we want TDD syntax
+        mocha.setup('tdd');
+    </script>
+
+    <!-- Libs -->
+    <script src="libs/underscore/underscore-min.js"></script>
+    <script src="libs/backbone/backbone.js"></script>
+
+    <!-- Source files -->
+    <script src="../src/backbone-tree-model-mixin.js"></script>
+
+    <!-- Test -->
+    <script src="backbone-tree-model-mixin.test.js"></script>
+
+    <script>
+if (window.mochaPhantomJS) {
+    mochaPhantomJS.run();
+}
+else {
+    mocha.run();
+}
+    </script>
+
+</body>
+</html>

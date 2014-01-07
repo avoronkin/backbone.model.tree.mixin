@@ -1,0 +1,11 @@
+{
+    "name": "backbone-tree-model-mixin",
+    "description": "backbone tree-model mixin",
+    "version": "0.0.1",
+    "engines": {
+        "node": ">= 0.10.x"
+    },
+    "dependencies": {},
+    "devDependencies": {},
+    "private": true
+}
