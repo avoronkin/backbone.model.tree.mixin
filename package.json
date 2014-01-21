@@ -1,10 +1,11 @@
 {
-  "name": "backbone-tree-model-mixin",
+  "name": "backbone.model.tree.mixin",
   "description": "backbone tree-model mixin",
   "repository": {
     "type": "git",
     "url": "git://github.com/avoronkin/backbone.model.tree.mixin.git"
   },
+  "main":"src/backbone.model.tree.mixin",
   "version": "0.0.1",
   "engines": {
     "node": ">= 0.10.x"
@@ -20,6 +21,5 @@
   },
   "scripts": {
     "test": "grunt test"
-  },
-  "private": true
+  }
 }
