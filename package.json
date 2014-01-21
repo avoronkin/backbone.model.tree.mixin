@@ -1,23 +1,25 @@
 {
-    "name": "backbone-tree-model-mixin",
-    "description": "backbone tree-model mixin",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/avoronkin/backbone.model.tree.mixin.git"
-    },
-    "version": "0.0.1",
-    "engines": {
-        "node": ">= 0.10.x"
-    },
-    "dependencies": {},
-    "devDependencies": {
-        "grunt": "~0.4.2",
-        "grunt-saucelabs": "~4.1.2",
-        "grunt-contrib-connect": "~0.6.0",
-        "grunt-contrib-watch": "~0.5.3"
-    },
-    "scripts": {
-        "test": "grunt test"
-    },
-    "private": true
+  "name": "backbone-tree-model-mixin",
+  "description": "backbone tree-model mixin",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/avoronkin/backbone.model.tree.mixin.git"
+  },
+  "version": "0.0.1",
+  "engines": {
+    "node": ">= 0.10.x"
+  },
+  "dependencies": {
+    "underscore": "~1.5.2"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-saucelabs": "~4.1.2",
+    "grunt-contrib-connect": "~0.6.0",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "private": true
 }
