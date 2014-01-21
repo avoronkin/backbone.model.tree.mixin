@@ -1,60 +1,71 @@
-var treeModelMixin = {
-    nodeId: 'name',
-    nodeParentId: 'parentName',
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['underscore'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('underscore'));
+    } else {
+        root.treeModelMixin = factory(root._);
+    }
+}(this, function (_) {
 
-    addChild: function (model) {
-        model.set(this.nodeParentId, this.get(this.nodeId));
-        this.collection.add(model);
-    },
+    return {
+        nodeId: 'name',
+        nodeParentId: 'parentName',
 
-    isRoot: function () {
-        return this.getParent() === undefined;
-    },
+        addChild: function (model) {
+            model.set(this.nodeParentId, this.get(this.nodeId));
+            this.collection.add(model);
+        },
 
-    getRoot: function () {
-        var parent = this.getParent();
+        isRoot: function () {
+            return this.getParent() === undefined;
+        },
 
-        return parent ? parent.getRoot() : this;
-    },
+        getRoot: function () {
+            var parent = this.getParent();
 
-    getParent: function () {
-        var parent,
-            parentId = this.get(this.nodeParentId),
-            whereClause = {};
+            return parent ? parent.getRoot() : this;
+        },
+
+        getParent: function () {
+            var parent,
+                parentId = this.get(this.nodeParentId),
+                whereClause = {};
 
 
-        if (parentId) {
-            whereClause[this.nodeId] = parentId;
+            if (parentId) {
+                whereClause[this.nodeId] = parentId;
 
-            parent = this.collection.findWhere(whereClause);
+                parent = this.collection.findWhere(whereClause);
+            }
+
+            return parent;
+        },
+
+        getChildren: function () {
+            var whereClause = {};
+
+            whereClause[this.nodeParentId] = this.get(this.nodeId);
+
+            return this.collection.where(whereClause);
+        },
+
+        getPatch: function (models) {
+            models = models || [];
+
+            models.unshift(this);
+
+            return this.isRoot() ? models : this.getParent().getPatch(models);
+        },
+
+        toJSON: function () {
+            var node = _.clone(this.attributes),
+                children = this.getChildren();
+
+            node.children = _.invoke(children, 'toJSON');
+
+            return node;
         }
 
-        return parent;
-    },
-
-    getChildren: function () {
-        var whereClause = {};
-
-        whereClause[this.nodeParentId] = this.get(this.nodeId);
-
-        return this.collection.where(whereClause);
-    },
-
-    getPatch: function (models) {
-        models = models || [];
-
-        models.unshift(this);
-
-        return this.isRoot() ? models : this.getParent().getPatch(models);
-    },
-
-    toJSON: function () {
-        var node = _.clone(this.attributes),
-            children = this.getChildren();
-
-        node.children = _.invoke(children, 'toJSON');
-
-        return node;
-    }
-
-};
+    };
+}));
