@@ -1,0 +1,10 @@
+{
+  "name": "backbone.model.tree.mixin",
+  "version": "0.0.3",
+  "main": "src/backbone.model.tree.mixin.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}
