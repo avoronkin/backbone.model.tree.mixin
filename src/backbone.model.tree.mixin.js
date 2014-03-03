@@ -50,12 +50,34 @@
             return this.collection.where(whereClause);
         },
 
+        getDescendants: function () {
+            var models = [];
+            var children = this.getChildren();
+
+            models = models.concat(children);
+
+            _(children).each(function (model) {
+                if(model.getDescendants().length){
+                    models = models.concat(model.getDescendants());
+                }
+            });
+
+            return models;
+        },
+
         getPatch: function (models) {
             models = models || [];
 
             models.unshift(this);
 
             return this.isRoot() ? models : this.getParent().getPatch(models);
+        },
+
+        isAncestor: function (model) {
+            var modelAncestors = model.getPatch();
+            return  _(modelAncestors).find(function (ancestor) {
+                return ancestor.cid === this.cid;
+            }, this);
         },
 
         toJSON: function () {
